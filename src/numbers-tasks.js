@@ -18,8 +18,8 @@
  *   5, 10 => 50
  *   5, 5  => 25
  */
-function getRectangleArea(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleArea(width, height) {
+  return width * height;
 }
 
 /**
@@ -33,8 +33,8 @@ function getRectangleArea(/* width, height */) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-function getCircleCircumference(/* radius */) {
-  throw new Error('Not implemented');
+function getCircleCircumference(radius) {
+  return 2 * radius * Math.PI;
 }
 
 /**
@@ -49,8 +49,8 @@ function getCircleCircumference(/* radius */) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function getAverage(value1, value) {
+  return value1 / 2 + value / 2;
 }
 
 /**
@@ -67,31 +67,33 @@ function getAverage(/* value1, value2 */) {
  *   (0,0) (0,1)    => 1
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
+ * AB = Math.sqr(Math.pow(x2 - x1) + Math.pow(y2 - y1))
  */
-function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
 /**
- * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
- *
+ * Returns a root of linear equation a*x + b = 0 given by coefficients a and b. // a*x = 0-b // x = -b/a
+ * Корень линейного уравнения – это значение переменной, при котором уравнение обращается в верное числовое равенство.
  * @param {number} a
  * @param {number} b
  * @return {number}
  *
  * @example:
- *   5*x - 10 = 0    => 2
- *   x + 8 = 0       => -8
+ *   5*x - 10 = 0    => 2  5*x= 10 x = 10/5
+ *   x + 8 = 0       => -8 x = 0-8
  *   5*x = 0         => 0
  */
-function getLinearEquationRoot(/* a, b */) {
-  throw new Error('Not implemented');
+function getLinearEquationRoot(a, b) {
+  return -b / a;
 }
 
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi,
  * coordinates in Cartesian plane.
  * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
+ * The Math.atan2() static method returns the angle in the plane (in radians) between the positive x-axis and the ray from (0, 0) to the point (x, y), for Math.atan2(y, x)
  *
  * @param {number} x1
  * @param {number} y1
@@ -113,6 +115,7 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
 /**
  * Returns a last digit of a integer number.
  * The input parameter will always be greater than or equal to zero and will be in decimal notation.
+ * return value === 0 ? 0 : +value.toString().slice(-1);
  *
  * @param {number} value
  * @return {number}
@@ -123,8 +126,8 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(/* value */) {
-  throw new Error('Not implemented');
+function getLastDigit(value) {
+  return value % 10;
 }
 
 /**
@@ -137,14 +140,15 @@ function getLastDigit(/* value */) {
  *    '100'     => 100
  *     '37'     => 37
  * '-525.5'     => -525.5
+ * +value; parseInt(value, 10); Number(value)
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
+function parseNumberFromString(value) {
+  return Number(value);
 }
 
 /**
  * Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
- *
+ * квадрат диагонали параллелепипеда равен сумме квадратов его измерений (длины трех ребер имеющих общую вершину)
  * @param {number} a
  * @param {number} b
  * @param {number} c
@@ -155,8 +159,8 @@ function parseNumberFromString(/* value */) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelepipedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelepipedDiagonal(a, b, c) {
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 /**
@@ -175,9 +179,10 @@ function getParallelepipedDiagonal(/* a, b, c */) {
  *   1678, 1  => 1680
  *   1678, 2  => 1700
  *   1678, 3  => 2000
+ *
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  return Math.round(num / 10 ** pow) * 10 ** pow;
 }
 
 /**
@@ -197,8 +202,16 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  if (n === 2) return true;
+  if (n < 2) return false;
+
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -216,8 +229,8 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  return Number.isInteger(parseInt(value, 10)) ? +value : def;
 }
 
 /**
@@ -231,8 +244,8 @@ function toNumber(/* value, def */) {
  *   -2 => -8
  *   0  => 0
  */
-function getCube(/* num */) {
-  throw new Error('Not implemented');
+function getCube(num) {
+  return num ** 3;
 }
 
 /**
@@ -240,7 +253,8 @@ function getCube(/* num */) {
  *
  * @param {number} index
  * @return {number}
- *
+ * 0 1 1 2 3 5 8 13 21 34 55
+ * 0 1 2 3 4 5 6  7 8  9  10
  * @example:
  *   0  => 0
  *   1  => 1
@@ -248,8 +262,18 @@ function getCube(/* num */) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  if (index < 1) return index;
+  if (index < 3) return 1;
+
+  let a = 1;
+  let b = 1;
+
+  for (let i = 3; i <= index; i += 1) {
+    const c = a + b;
+    [a, b] = [b, c];
+  }
+  return b;
 }
 
 /**
@@ -263,8 +287,8 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  return n === 1 ? n : n + getSumToN(n - 1);
 }
 
 /**
@@ -278,8 +302,11 @@ function getSumToN(/* n */) {
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  return +num
+    .toString()
+    .split('')
+    .reduce((a, c) => a + +c, 0);
 }
 
 /**
@@ -293,8 +320,8 @@ function getSumOfDigits(/* num */) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  
 }
 
 /**
